@@ -12,14 +12,14 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-public class LoanResponse {
+public class LoanGetResponse {
     private Long id;
     private BigDecimal loanAmount;
     private Integer loanPeriod;
     private String loanType;
     private BigDecimal interestRate;
 
-    public LoanResponse(Loan loan) {
+    public LoanGetResponse(Loan loan) {
         this.id = loan.getId();
         this.loanAmount = loan.getLoanAmount();
         this.loanPeriod = loan.getLoanPeriod();

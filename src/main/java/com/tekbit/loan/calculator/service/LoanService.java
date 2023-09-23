@@ -1,7 +1,9 @@
 package com.tekbit.loan.calculator.service;
 
 import com.tekbit.loan.calculator.payload.request.LoanRequest;
-import com.tekbit.loan.calculator.payload.response.ApiResponse;
+import com.tekbit.loan.calculator.payload.response.GenericResponse;
+import com.tekbit.loan.calculator.payload.response.LoanGetResponse;
+import com.tekbit.loan.calculator.payload.response.LoanListResponse;
 import com.tekbit.loan.calculator.payload.response.LoanResponse;
 import java.util.List;
 
@@ -11,11 +13,11 @@ public interface LoanService {
     LoanResponse saveLoan(LoanRequest loan);
 
 
-    LoanResponse updateLoan(Long id, LoanRequest loan);
+    GenericResponse updateLoan(Long id, LoanRequest loan);
 
-    LoanResponse getLoan(Long id);
+    LoanGetResponse getLoan(Long id);
 
-    List<LoanResponse> getAllLoans();
+    List<LoanListResponse> getAllLoans();
 
-    ApiResponse deleteLoan(Long id);
+    GenericResponse deleteLoan(Long id);
 }

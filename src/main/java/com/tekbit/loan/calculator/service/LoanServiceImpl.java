@@ -1,7 +1,11 @@
 package com.tekbit.loan.calculator.service;
 
+import com.tekbit.loan.calculator.model.Loan;
+import com.tekbit.loan.calculator.payload.exception.LoanNotFoundException;
 import com.tekbit.loan.calculator.payload.request.LoanRequest;
-import com.tekbit.loan.calculator.payload.response.ApiResponse;
+import com.tekbit.loan.calculator.payload.response.GenericResponse;
+import com.tekbit.loan.calculator.payload.response.LoanGetResponse;
+import com.tekbit.loan.calculator.payload.response.LoanListResponse;
 import com.tekbit.loan.calculator.payload.response.LoanResponse;
 import com.tekbit.loan.calculator.repository.LoanRepository;
 import org.springframework.stereotype.Service;
@@ -23,26 +27,38 @@ public class LoanServiceImpl implements LoanService{
 
     @Override
     public LoanResponse saveLoan(LoanRequest loan) {
-        return null;
+        Loan loanEntity = loan.toEntity();
+        Loan loanEntityResponse = loanRepository.save(loanEntity);
+        return new LoanResponse(loanEntityResponse);
     }
 
     @Override
-    public LoanResponse updateLoan(Long id, LoanRequest loan) {
-        return null;
+    public GenericResponse updateLoan(Long id, LoanRequest loan) {
+
+        Loan loanEntity = loanRepository.findById(id).orElseThrow(() -> new LoanNotFoundException("Loan not found with id: " + id));
+
+        loanEntity.setLoanAmount(loan.getLoanAmount());
+        loanEntity.setInterestRate(loan.getInterestRate());
+        loanEntity.setLoanType(loan.getLoanType());
+        loanEntity.setLoanPeriod(loan.getLoanPeriod());
+        loanRepository.save(loanEntity);
+
+        return new GenericResponse(true, "Loan updated successfully");
     }
 
     @Override
-    public LoanResponse getLoan(Long id) {
-        return null;
+    public LoanGetResponse getLoan(Long id) {
+        return loanRepository.findById(id).map(LoanGetResponse::new).orElseThrow(()-> new LoanNotFoundException("Loan not found with id: " + id));
     }
 
     @Override
-    public List<LoanResponse> getAllLoans() {
-        return null;
+    public List<LoanListResponse> getAllLoans() {
+        return loanRepository.findAll().stream().map(LoanListResponse::new).toList();
     }
 
     @Override
-    public ApiResponse deleteLoan(Long id) {
-        return null;
+    public GenericResponse deleteLoan(Long id) {
+        loanRepository.deleteById(id);
+        return new GenericResponse(true, "Loan deleted successfully");
     }
 }

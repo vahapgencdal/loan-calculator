@@ -16,7 +16,7 @@ import lombok.Data;
         "success",
         "message"
 })
-public class ApiResponse implements Serializable {
+public class GenericResponse implements Serializable {
 
     @Serial
     @JsonIgnore
@@ -31,16 +31,16 @@ public class ApiResponse implements Serializable {
     @JsonIgnore
     private HttpStatus status;
 
-    public ApiResponse() {
+    public GenericResponse() {
 
     }
 
-    public ApiResponse(Boolean success, String message) {
+    public GenericResponse(Boolean success, String message) {
         this.success = success;
         this.message = message;
     }
 
-    public ApiResponse(Boolean success, String message, HttpStatus httpStatus) {
+    public GenericResponse(Boolean success, String message, HttpStatus httpStatus) {
         this.success = success;
         this.message = message;
         this.status = httpStatus;
