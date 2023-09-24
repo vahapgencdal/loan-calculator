@@ -7,6 +7,4 @@ public enum LoanType {
     VEHICLE_LOAN,
     BUSINESS_LOAN,
     EDUCATION_LOAN,
-    SOLAR_ENERGY_LOAN,
-    ENERGY_EFFICIENCY_LOAN,
 }

@@ -4,14 +4,12 @@ import com.tekbit.loan.calculator.enums.LoanType;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
-@NoArgsConstructor
 @Table(name = "LOANS",uniqueConstraints = { @UniqueConstraint(name = "UniqueLoanAmountPeriodTypeAndRate", columnNames = { "LOAN_AMOUNT", "LOAN_PERIOD", "LOAN_TYPE", "INTEREST_RATE" }) })
 public class Loan extends UserDateAudit {
 
@@ -33,4 +31,6 @@ public class Loan extends UserDateAudit {
     @Column(name = "INTEREST_RATE")
     private BigDecimal interestRate;
 
+    @Column(name = "MONTHLY_PAYMENT")
+    private BigDecimal monthlyPayment;
 }
