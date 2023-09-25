@@ -2,6 +2,7 @@ package com.tekbit.loan.calculator.model;
 
 import com.tekbit.loan.calculator.enums.LoanType;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Digits;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -29,6 +30,7 @@ public class Loan extends UserDateAudit {
     private LoanType loanType;
 
     @Column(name = "INTEREST_RATE")
+    @Digits(integer=3, fraction=4)
     private BigDecimal interestRate;
 
     @Column(name = "MONTHLY_PAYMENT")
