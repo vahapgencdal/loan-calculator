@@ -20,6 +20,8 @@ import java.math.BigDecimal;
 @Builder
 public class LoanRequest {
 
+    private static final BigDecimal INTEREST_RATE = BigDecimal.valueOf(3.5);
+
     @Schema(description = "The loan amount", name = "loanAmount", defaultValue = "100000", example = "100000")
     @Range(min = 1, max =9999999, message = "The loan amount must be between {min} - {max}")
     private BigDecimal loanAmount;
@@ -33,7 +35,6 @@ public class LoanRequest {
     private LoanType loanType;
 
     @Schema(description = "The interest rate", name = "interestRate", defaultValue = "3.5", example = "3.5")
-    @NotNull(message = "Loan type is mandatory")
     @Positive(message = "Interest rate must be positive")
     @Range(min = 0, max = 100, message = "Interest rate must be between {min} - {max}")
     private BigDecimal interestRate;
@@ -46,5 +47,12 @@ public class LoanRequest {
         loan.setInterestRate(this.interestRate);
         loan.setMonthlyPayment(monthlyPayment);
         return loan;
+    }
+
+    public BigDecimal getInterestRate() {
+        if (interestRate == null) {
+            return INTEREST_RATE;
+        }
+        return interestRate;
     }
 }
