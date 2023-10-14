@@ -1,0 +1,108 @@
+{
+	"info": {
+		"_postman_id": "f33bc4c3-a661-430e-8e6b-c42780c4abcc",
+		"name": "loan-calculator",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "calculate_monthly_payments",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"loanAmount\": 120000,\r\n    \"loanPeriod\": 10,\r\n    \"loanType\": \"EDUCATION_LOAN\",\r\n    \"interestRate\": 1.9\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/loans/monthly/payments/calculate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"loans",
+						"monthly",
+						"payments",
+						"calculate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "fetch_all_calculated_monthly_payments",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/loans/monthly/payments?loanType=HOUSING_LOAN",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"loans",
+						"monthly",
+						"payments"
+					],
+					"query": [
+						{
+							"key": "loanType",
+							"value": "HOUSING_LOAN"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "api_host",
+			"value": "localhost",
+			"type": "default"
+		},
+		{
+			"key": "api_port",
+			"value": "8080",
+			"type": "default"
+		},
+		{
+			"key": "api-uri",
+			"value": "api/v1",
+			"type": "default"
+		}
+	]
+}
